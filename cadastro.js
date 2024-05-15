@@ -3,18 +3,23 @@ let clientes = []
 // Função para Adicionar o nome na ARRAY
 function addClient(){
     let clientNameInput = document.querySelector('#clientName');
-    let clientName = clientNameInput.value.trim();
+    let clientName = clientNameInput.value.trim(); // trim() == Remove da cadeia de caracteres atual todos os caracteres de espaço em branco à esquerda e à direita.
+ 
+    // Variavel para definir que o nome deve ter a primeira letra maiuscula seguida de minisculas com acentos e pelo menos o sobrenome 
+    let namePattern = /^[A-ZÀ-ÿ][a-zà-ÿ]*\s[A-ZÀ-ÿ][a-zà-ÿ]*(\s[A-ZÀ-ÿ][a-zà-ÿ]*)*$/;
 
     if (clientName === "") { // Condição para se o campo de nome estiver vazio alertar a que tem q ser prenchido
-        alert('Por favor, insera o nome do cliente!');
-    } else if (!/^[A-Z][a-z]*$/.test(clientName)){
-        alert('Por favor, insira um nome válido, tente colocar a primeira letra Maiuscula e apenas o seu primeiro nome!');
+        alert('Por favor, insira o nome completo do cliente.');
+    } else if (!namePattern.test(clientName)){
+        alert('O nome completo deve conter pelo menos um sobrenome, e cada parte deve começar com uma letra maiúscula seguida de letras minúsculas.');
     } else if (clientes.includes(clientName)) { // Condição caso o nome do cliente ja esteja na lista
         alert('Este cliente já está cadastrado!');
     } else {
         clientes.push(clientName);
         console.log(`Clientes: ${clientes}`);
         clientNameInput.value = ''; // Para limpar o imput quando colocado o nome
+
+        displayClients();
         
         if(clientes.length > 0){ // Condição para exibir o remover clientes quando ele estiver na Array
         document.querySelector('#removeSection').style.display = 'block';
@@ -36,10 +41,24 @@ function removeClient(){
         console.log(`Clientes: ${clientes}`);
         removeClientNameInput.value = "";
 
+        displayClients();
+
         if(clientes.length === 0){
             document.querySelector('#removeSection').style.display = 'none';
         }
     }
+}
+
+function displayClients(){
+    let clientListContainer = document.querySelector('#clientListContainer');
+    clientListContainer.innerHTML = '';
+
+    clientes.forEach(client => {
+        let div = document.createElement('div');
+        div.className = 'client-item';
+        div.textContent = client;
+        clientListContainer.appendChild(div);
+    })
 }
 
 // Funcões para limpar os inputs quando estiverem com algo escrito

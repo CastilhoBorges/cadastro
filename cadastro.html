@@ -7,28 +7,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div class="container">
         
-        <!--Sessão de Cadastro-->
-        <h2>Cadastro de Clientes</h2>
-        <input type="text" id="clientName" placeholder="Nome Cliente">
+      <!--Sessão de Cadastro-->
+      <h2>Cadastro de Clientes</h2>
+      <input type="text" id="clientName" placeholder="Nome Completo">
+      <div class="buttons">
+        <button onclick="addClient()">Adicionar</button>
+        <button onclick="clearInput()">Limpar</button>
+      </div>
+
+      <!-- Campo para exibir a lista de clientes -->
+      <h2>Lista de Clientes</h2>
+      <div id="clientListContainer"></div>
+        
+      <!--Sessão de remover-->
+      <div id="removeSection" style="display: none;">
+        <h2>Remover Cliente</h2>
+        <input type="text" id="removeClientName" placeholder="Nome do Cliente a Remover">
         <div class="buttons">
-          <button onclick="addClient()">Adicionar</button>
-          <button onclick="clearInput()">Limpar</button>
-        </div>
-
-        <!--Sessão de remover da array-->
-        <div id="removeSection">
-            <h2>Remover Cliente</h2>
-            <input type="text" id="removeClientName" placeholder="Nome do Cliente a Remover">
-            <div class="buttons">
-              <button onclick="removeClient()">Remover</button>
-              <button onclick="clearRemoveInput()">Limpar</button>
-            </div>
-        </div>
-
+          <button onclick="removeClient()">Remover</button>
+          <button onclick="clearRemoveInput()">Limpar</button>
+        </div>       
+      </div>
+      
     </div>
-
+      
     <script src="cadastro.js"></script>
 
 </body>
