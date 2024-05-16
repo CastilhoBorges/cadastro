@@ -50,15 +50,20 @@ function removeClient(){
 }
 
 function displayClients(){
-    let clientListContainer = document.querySelector('#clientListContainer');
+    let clientListContainer = document.querySelector('#clientListContainer');                               
     clientListContainer.innerHTML = '';
-
-    clientes.forEach(client => {
-        let div = document.createElement('div');
-        div.className = 'client-item';
-        div.textContent = client;
-        clientListContainer.appendChild(div);
-    })
+   
+    if(clientes.length > 0){  // Caso tenha o cliente na lista ela aparece na tela
+        clientListSection.style.display = 'block'   
+        clientes.forEach(client => {
+            let div = document.createElement('div');
+            div.className = 'client-item';
+            div.textContent = client;
+            clientListContainer.appendChild(div);
+        });
+    } else { // Condição caso não tenha nome na lista a div de lista deixa de ser projetada 
+        clientListSection.style.display = 'none';
+    }
 }
 
 // Funcões para limpar os inputs quando estiverem com algo escrito
@@ -68,6 +73,8 @@ function clearInput() {
 function clearRemoveInput() {
     document.getElementById("removeClientName").value = "";
 }
+
+
 
 
 

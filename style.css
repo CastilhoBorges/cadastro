@@ -51,6 +51,10 @@ button:hover {
   margin-top: 20px;
 }
 
+#clientListSection{
+  display: none;
+}
+
 .client-item {
   padding: 10px;
   border-bottom: 1px solid #ddd;
