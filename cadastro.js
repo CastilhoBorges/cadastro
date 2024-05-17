@@ -36,7 +36,7 @@ function removeClient(){
         alert('Por favor, insira o nome do cliente que deseja remover!');
     } else if(!clientes.includes(clientName)){ // Condição caso o cliente não esteja na ARRAY
         alert('Este cliente não está cadastrado!');
-    } else{
+    } else {
         clientes = clientes.filter(cliente => cliente !== clientName); // Comando para remover o cliente
         console.log(`Clientes: ${clientes}`);
         removeClientNameInput.value = "";
