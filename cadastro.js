@@ -60,7 +60,7 @@ function displayClients(){
 
 function toggleRemoveSection(){
     let removeSection = document.querySelector('#removeSection')
-    removeSection.style.display = clientes.length > 0 ? "block" : "none"; // Condição para mostrar a div de remover cliente
+    removeSection.style.display = clientes.length > 0 ? "block" : "none";  
 }
 
 // Funcões para limpar os inputs quando estiverem com algo escrito
