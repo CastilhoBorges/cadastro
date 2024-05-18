@@ -18,25 +18,12 @@ function addClient(){
     clientes.push(clientName);
     clientNameInput.value = '';
     displayClients();
-    toggleRemoveSection();
    }
 }
 
-// Função para remover cliente da ARRAY
-function removeClient(){
-    let removeClientNameInput = document.querySelector('#removeClientName');
-    let clientName = removeClientNameInput.value.trim();
-
-    if(!clientName){
-        alert('Por favor, insira o nome do cliente que deseja remover!');
-    } else if(!clientes.includes(clientName)){ // Condição caso o cliente não esteja na ARRAY
-        alert('Este cliente não está cadastrado!');
-    } else {
-        clientes = clientes.filter(cliente => cliente !== clientName); // Comando para remover o cliente
-        removeClientNameInput.value = "";
-        displayClients();
-        toggleRemoveSection();
-    }
+function removeClient(clientName){
+    clientes = clientes.filter(client => client !== clientName);
+    displayClients();
 }
 
 function displayClients(){
@@ -46,29 +33,31 @@ function displayClients(){
     clientListContainer.innerHTML = "";
 
     if(clientes.length > 0){  // Caso tenha o cliente na lista ela aparece na tela
-        clientListSection.style.display = 'block'   
-        clientes.forEach(client => {
-            let div = document.createElement('div');
-            div.className = 'client-item';
-            div.textContent = client;
-            clientListContainer.appendChild(div);
-        });
-    } else { // Condição caso não tenha nome na lista a div de lista deixa de ser projetada 
-        clientListSection.style.display = 'none';
-    }
-}
+        clientListSection.style.display = 'block';
+        clientes.forEach(client =>{
+            let div = document.createElement('div'); // Cria o elemento div no HTML 
+            div.className = 'client-item'; // define a classe do elemente div para ser adicionado os estilos no CSS 
 
-function toggleRemoveSection(){
-    let removeSection = document.querySelector('#removeSection')
-    removeSection.style.display = clientes.length > 0 ? "block" : "none";  
+            let nameSpan = document.createElement('span'); // Cria o elemento Span
+            nameSpan.textContent = client; // Define o texto que vai aparecer no Span
+
+            let removeButton = document.createElement('button'); // Cria o elemento de botão 
+            removeButton.className = 'remove-button'; // Define a classe para o botão
+            removeButton.textContent = 'Remover'; // Definindo o texto que vai aparecer no elemento botton
+            removeButton.onclick = () => removeClient(client); // Atribui a função de clique ao botão e faz que quando ele seja clicado a função de remover é acionada com o nome do cliente atual 
+
+            div.appendChild(nameSpan); // Adiciona o elemento Span ao div
+            div.appendChild(removeButton); // adiciona o botão de remover no div
+            clientListContainer.appendChild(div); // Adiciona o div ao container da lista de clientes 
+        }); 
+    } else {
+        clientListSection.style.display = 'none'; // Se nada de cima acontecer a lista vai ser ocultada 
+    }
 }
 
 // Funcões para limpar os inputs quando estiverem com algo escrito
 function clearInput() { 
     document.getElementById("clientName").value = "";
-}
-function clearRemoveInput() {
-    document.getElementById("removeClientName").value = "";
 }
 
 

@@ -51,15 +51,27 @@ button:hover {
   margin-top: 20px;
 }
 
-#clientListSection{
-  display: none;
-}
-
 .client-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px;
   border-bottom: 1px solid #ddd;
 }
 
 .client-item:last-child {
   border-bottom: none;
+}
+
+.remove-button {
+  background-color: #d9534f;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  background-color: #c9302c;
 }
