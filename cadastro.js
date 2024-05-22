@@ -1,4 +1,4 @@
-let clientes = []
+var clientes = []
 
 // Função para Adicionar o nome na ARRAY
 function addClient(){
@@ -34,7 +34,7 @@ function displayClients(){
 
     if(clientes.length > 0){  // Caso tenha o cliente na lista ela aparece na tela
         clientListSection.style.display = 'block';
-        clientes.forEach(client =>{
+        clientes.forEach(client => {
             let div = document.createElement('div'); // Cria o elemento div no HTML 
             div.className = 'client-item'; // define a classe do elemente div para ser adicionado os estilos no CSS 
 
