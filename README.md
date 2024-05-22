@@ -8,6 +8,6 @@
 
 ## Sobre o Projeto
 
-Descreva brevemente o seu projeto. O que ele faz? Qual problema ele resolve? Qual a motivação por trás dele?
+Neste simples projeto, fiz um sistema de adicionar e remover nomes de uma ARRAY...
 
 
