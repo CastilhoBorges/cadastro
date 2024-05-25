@@ -1,58 +1,51 @@
-var clientes = []
+let clientes = []
 
 // Função para Adicionar o nome na ARRAY
 function addClient(){
-    let clientNameInput = document.querySelector('#clientName');
-    let clientName = clientNameInput.value.trim(); // trim() == Remove da cadeia de caracteres atual todos os caracteres de espaço em branco à esquerda e à direita.
+    const clientNameInput = document.querySelector('#clientName');
+    const clientName = clientNameInput.value.trim(); // trim() == Remove da cadeia de caracteres atual todos os caracteres de espaço em branco à esquerda e à direita.
  
     // Variavel para definir que o nome deve ter a primeira letra maiuscula seguida de minisculas com acentos e pelo menos o sobrenome 
-    let namePattern = /^[A-ZÀ-ÿ][a-zà-ÿ]*\s[A-ZÀ-ÿ][a-zà-ÿ]*(\s[A-ZÀ-ÿ][a-zà-ÿ]*)*$/;
+    const namePattern = /^[A-ZÀ-ÿ][a-zà-ÿ]*\s[A-ZÀ-ÿ][a-zà-ÿ]*(\s[A-ZÀ-ÿ][a-zà-ÿ]*)*$/;
 
-   if(!clientName){
-    alert('Por favor, insira o nome completo do cliente!');
-   } else if (!namePattern.test(clientName)){
-    alert("O nome completo deve conter pelo menos um sobrenome, e cada parte deve começar com uma letra maiúscula seguida de letras minúsculas.");
-   } else if(clientes.includes(clientName)){
-    alert('Este cliente já está cadastrado!');
-   } else {
-    clientes.push(clientName);
-    clientNameInput.value = '';
-    displayClients();
-   }
+    !clientName // Caso o campo de prencher esteja vazio 
+    ? alert('Por favor insira o nome completo do cliente')
+    : !namePattern.test(clientName) // Se o nome que for colocado não tiver de acordo com a regra  
+    ? alert('O nome completo deve conter pelo menos um sobrenome, e cada parte deve começar com uma letra maiúscula seguida de letras minúsculas.')
+    : clientes.includes(clientName) // Ve se o nome esta ja cadastrado na array
+    ? alert('Este cliente já esta cadastrado')
+    : (clientes.push(clientName), clientNameInput.value = '', displayClients()) // Se nada de cima der true, então ele pega o nome colocado e joga na array 
 }
 
 function removeClient(clientName){
     clientes = clientes.filter(client => client !== clientName);
-    displayClients();
+    displayClients(); 
 }
 
 function displayClients(){
-    let clientListContainer = document.querySelector('#clientListContainer');
-    let clientListSection = document.querySelector('#clientListSection');
+    const clientListContainer = document.querySelector('#clientListContainer');
+    const clientListSection = document.querySelector('#clientListSection');
 
     clientListContainer.innerHTML = "";
 
-    if(clientes.length > 0){  // Caso tenha o cliente na lista ela aparece na tela
-        clientListSection.style.display = 'block';
-        clientes.forEach(client => {
-            let div = document.createElement('div'); // Cria o elemento div no HTML 
-            div.className = 'client-item'; // define a classe do elemente div para ser adicionado os estilos no CSS 
+    clientes.length > 0
+    ? (clientListSection.style.display = 'block', clientes.forEach(client => {
+        const div = document.createElement('div');
+        div.className = 'client-item';
 
-            let nameSpan = document.createElement('span'); // Cria o elemento Span
-            nameSpan.textContent = client; // Define o texto que vai aparecer no Span
+        const nameSpan = document.createElement('span');
+        nameSpan.textContent = client;
 
-            let removeButton = document.createElement('button'); // Cria o elemento de botão 
-            removeButton.className = 'remove-button'; // Define a classe para o botão
-            removeButton.textContent = 'Remover'; // Definindo o texto que vai aparecer no elemento botton
-            removeButton.onclick = () => removeClient(client); // Atribui a função de clique ao botão e faz que quando ele seja clicado a função de remover é acionada com o nome do cliente atual 
+        const removeButton = document.createElement('button');
+        removeButton.className = 'remove-button';
+        removeButton.textContent = 'Remover';
+        removeButton.onclick = () => removeClient(client);
 
-            div.appendChild(nameSpan); // Adiciona o elemento Span ao div
-            div.appendChild(removeButton); // adiciona o botão de remover no div
-            clientListContainer.appendChild(div); // Adiciona o div ao container da lista de clientes 
-        }); 
-    } else {
-        clientListSection.style.display = 'none'; // Se nada de cima acontecer a lista vai ser ocultada 
-    }
+        div.appendChild(nameSpan);
+        div.appendChild(removeButton);
+        clientListContainer.appendChild(div);
+    }))
+    : clientListSection.style.display = 'none';
 }
 
 // Funcões para limpar os inputs quando estiverem com algo escrito
