@@ -30,7 +30,9 @@ function addClient(){
 } 
 ```
 . Parâmetros: Nenhum
+
 . Retorno: Nenhum
+
 . Descrição:
     . Obtém o nome do cliente do campo de entrada.
     . Remove espaços em branco antes e depois do nome.
